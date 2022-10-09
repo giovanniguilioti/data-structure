@@ -18,4 +18,11 @@ int SearchElement(node_t* head, int value);
 
 int ElementAt(node_t* head, int index);
 
+int InsertBegin(node_t* head, int value);
+
+int InsertAt(node_t* head, int index, int value);
+
+int InsertEnd(node_t* head, int value);
+
+
 #endif

@@ -34,7 +34,7 @@ int SearchElement(node_t* head, int value)
     int i = 0;
     while(temp != NULL)
     {
-        if(temp.data == value)
+        if(temp->data == value)
             return i;
         
         temp = temp->next;
@@ -60,5 +60,65 @@ int ElementAt(node_t* head, int index)
         ++i;
     }
     
-    return temp.data;
+    return temp->data;
+}
+
+int InsertBegin(node_t* head, int value)
+{
+    node_t* new = malloc(sizeof(node_t));
+    if(new == NULL)
+        return 0;
+
+    new->data = value;
+    new->next = head;
+    head = new;
+
+    return 1;
+}
+
+int InsertAt(node_t* head, int index, int value)
+{
+    if(index < 0 || index >= ListSize(head))
+        return 0;
+
+    node_t* new = malloc(sizeof(node_t));
+    if(new == NULL)
+        return 0;
+
+    new->data = value;
+    new->next = NULL;
+
+    node_t* temp = head;
+    int i = 0;
+    while(i < index)
+    {
+        temp = temp->next;
+    }
+
+    new->next = temp->next;
+    temp->next = new;
+    return 1;
+}
+
+int InsertEnd(node_t* head, int value)
+{
+    node_t* new = malloc(sizeof(node_t));
+    if(new == NULL)
+        return 0;
+    
+    new->data = value;
+    new->next = NULL;
+
+    if(IsEmpty(head))
+    {
+        head = new;
+        return 1;
+    }
+
+    node_t* temp = head;
+    while(temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = new;
+    return 1;
 }
