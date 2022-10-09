@@ -1,6 +1,6 @@
 #include "linkedlist.h"
 
-int IsEmpty(node_t* head)
+int IsEmpty(struct node* head)
 {
     if(head == NULL)
         return 1;
@@ -8,12 +8,12 @@ int IsEmpty(node_t* head)
     return 0;
 }
 
-int ListSize(node_t* head)
+int ListSize(struct node* head)
 {
     if(head == NULL)
         return 0;
 
-    node_t* temp = head->next;
+    struct node* temp = head->next;
 
     int i = 1;
     while(temp != NULL)
@@ -25,12 +25,12 @@ int ListSize(node_t* head)
     return i;
 }
 
-int SearchElement(node_t* head, int value)
+int SearchElement(struct node* head, int value)
 {
     if(IsEmpty(head))
         return -1;
 
-    node_t* temp = head;
+    struct node* temp = head;
     int i = 0;
     while(temp != NULL)
     {
@@ -44,15 +44,18 @@ int SearchElement(node_t* head, int value)
     return -1;
 }
 
-int ElementAt(node_t* head, int index)
+int ElementAt(struct node* head, int index)
 {
     if(IsEmpty(head))
+        return 0;
+
+    if(index < 0)
         return 0;
 
     if(index >= ListSize(head))
         return 0;
 
-    node_t* temp = head;
+    struct node* temp = head;
     int i = 0;
     while(i < index)
     {
@@ -63,57 +66,67 @@ int ElementAt(node_t* head, int index)
     return temp->data;
 }
 
-int InsertBegin(node_t* head, int value)
+int InsertBegin(struct node** head, int value)
 {
-    node_t* new = malloc(sizeof(node_t));
+    struct node* new = malloc(sizeof(struct node));
     if(new == NULL)
         return 0;
 
     new->data = value;
-    new->next = head;
-    head = new;
+    new->next = *head;
+    *head = new;
 
     return 1;
 }
 
-int InsertAt(node_t* head, int index, int value)
+int InsertAt(struct node** head, int index, int value)
 {
-    if(index < 0 || index >= ListSize(head))
+    if(index < 0 || index >= ListSize(*head))
         return 0;
 
-    node_t* new = malloc(sizeof(node_t));
+    struct node* new = malloc(sizeof(struct node));
     if(new == NULL)
         return 0;
 
     new->data = value;
     new->next = NULL;
 
-    node_t* temp = head;
-    int i = 0;
+    if(index == 0)
+    {
+        new->next = *head;
+        *head = new;
+        return 1;
+    }
+
+    struct node* temp = *head;
+    int i = 1;
     while(i < index)
+    {
         temp = temp->next;
+        ++i;
+    }
 
     new->next = temp->next;
     temp->next = new;
     return 1;
 }
 
-int InsertEnd(node_t* head, int value)
+int InsertEnd(struct node** head, int value)
 {
-    node_t* new = malloc(sizeof(node_t));
+    struct node* new = malloc(sizeof(struct node));
     if(new == NULL)
         return 0;
     
     new->data = value;
     new->next = NULL;
 
-    if(IsEmpty(head))
+    if(IsEmpty(*head))
     {
-        head = new;
+        *head = new;
         return 1;
     }
 
-    node_t* temp = head;
+    struct node* temp = *head;
     while(temp->next != NULL)
         temp = temp->next;
 
@@ -121,63 +134,66 @@ int InsertEnd(node_t* head, int value)
     return 1;
 }
 
-int DeleteBegin(node_t* head)
+int DeleteBegin(struct node** head)
 {
-    if(IsEmpty(head))
+    if(IsEmpty(*head))
         return 0;
 
-    node_t* temp = head;
-    head = head->next;
+    struct node* temp = *head;
+    *head = (*head)->next;
     free(temp);
     return 1;
 }
 
-int DeleteAt(node_t* head, int index)
+int DeleteAt(struct node** head, int index)
 {
-    if(IsEmpty(head))
+    if(IsEmpty(*head))
         return 0;
 
-    if(index < 0 || index >= ListSize(head))
+    if(index < 0 || index >= ListSize(*head))
         return 0;
 
-    node_t* temp = head;
+    struct node* temp = *head;
 
     if(index == 0)
     {
-        head = head->next;
+        *head = (*head)->next;
         free(temp);
         return 1;
     }
 
     int i = 1;
     while(i < index)
+    {
         temp = temp->next;
+        ++i;
+    }
 
-    node_t* end = temp->next;
+    struct node* end = temp->next;
     temp->next = temp->next->next;
 
     free(end);
     return 1;
 }
 
-int DeleteEnd(node_t* head)
+int DeleteEnd(struct node** head)
 {
-    if(IsEmpty(head))
+    if(IsEmpty(*head))
         return 0;
 
-    node_t* temp = head;
+    struct node* temp = *head;
 
-    if(ListSize(head) == 1)
+    if(ListSize(*head) == 1)
     {
         free(temp);
-        head = NULL;
+        *head = NULL;
         return 1;
     }
 
     while(temp->next->next != NULL)
         temp = temp->next;
 
-    node_t* end = temp->next;
+    struct node* end = temp->next;
     free(end);
 
     temp->next = NULL;
