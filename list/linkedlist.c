@@ -91,9 +91,7 @@ int InsertAt(node_t* head, int index, int value)
     node_t* temp = head;
     int i = 0;
     while(i < index)
-    {
         temp = temp->next;
-    }
 
     new->next = temp->next;
     temp->next = new;
@@ -120,5 +118,68 @@ int InsertEnd(node_t* head, int value)
         temp = temp->next;
 
     temp->next = new;
+    return 1;
+}
+
+int DeleteBegin(node_t* head)
+{
+    if(IsEmpty(head))
+        return 0;
+
+    node_t* temp = head;
+    head = head->next;
+    free(temp);
+    return 1;
+}
+
+int DeleteAt(node_t* head, int index)
+{
+    if(IsEmpty(head))
+        return 0;
+
+    if(index < 0 || index >= ListSize(head))
+        return 0;
+
+    node_t* temp = head;
+
+    if(index == 0)
+    {
+        head = head->next;
+        free(temp);
+        return 1;
+    }
+
+    int i = 1;
+    while(i < index)
+        temp = temp->next;
+
+    node_t* end = temp->next;
+    temp->next = temp->next->next;
+
+    free(end);
+    return 1;
+}
+
+int DeleteEnd(node_t* head)
+{
+    if(IsEmpty(head))
+        return 0;
+
+    node_t* temp = head;
+
+    if(ListSize(head) == 1)
+    {
+        free(temp);
+        head = NULL;
+        return 1;
+    }
+
+    while(temp->next->next != NULL)
+        temp = temp->next;
+
+    node_t* end = temp->next;
+    free(end);
+
+    temp->next = NULL;
     return 1;
 }

@@ -24,5 +24,10 @@ int InsertAt(node_t* head, int index, int value);
 
 int InsertEnd(node_t* head, int value);
 
+int DeleteBegin(node_t* head);
+
+int DeleteAt(node_t* head, int index);
+
+int DeleteEnd(node_t* head);
 
 #endif
