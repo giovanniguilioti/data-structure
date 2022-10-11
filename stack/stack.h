@@ -17,4 +17,6 @@ int Top(struct node* top);
 
 int Push(struct node** top, int value);
 
+int Pop(struct node** top);
+
 #endif

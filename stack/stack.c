@@ -46,3 +46,15 @@ int Push(struct node** top, int value)
 
     return 1;
 }
+
+int Pop(struct node** top)
+{
+    if(IsEmpty(*top))
+        return 0;
+
+    struct node* temp = *top;
+    *top = (*top)->next;
+    free(temp);
+
+    return 1;
+}
