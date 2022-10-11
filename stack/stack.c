@@ -33,3 +33,16 @@ int Top(struct node* top)
 
     return top->data;
 }
+
+int Push(struct node** top, int value)
+{
+    struct node* new = malloc(sizeof(struct node));
+    if(new == NULL)
+        return 0;
+
+    new->data = value;
+    new->next = *top;
+    *top = new;
+
+    return 1;
+}

@@ -15,4 +15,6 @@ int StackSize(struct node* top);
 
 int Top(struct node* top);
 
+int Push(struct node** top, int value);
+
 #endif
