@@ -33,6 +33,22 @@ int QueueSize(struct queue* queue)
     return i;
 }
 
+int Front(struct queue* queue)
+{
+    if(queue->front == NULL)
+        return 0;
+
+    return queue->front->data;
+}
+
+int Back(struct queue* queue)
+{
+    if(queue->front == NULL)
+        return 0;
+
+    return queue->rear->data;
+}
+
 int EnQueue(struct queue* queue, int value)
 {
     struct node* new = malloc(sizeof(struct node));
