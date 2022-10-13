@@ -21,4 +21,6 @@ int IsEmpty(struct queue* queue);
 
 int QueueSize(struct queue* queue);
 
+int EnQueue(struct queue* queue, int value);
+
 #endif
