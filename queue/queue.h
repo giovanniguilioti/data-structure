@@ -23,4 +23,6 @@ int QueueSize(struct queue* queue);
 
 int EnQueue(struct queue* queue, int value);
 
+int DeQueue(struct queue* queue);
+
 #endif

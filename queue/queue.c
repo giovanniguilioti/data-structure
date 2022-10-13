@@ -52,3 +52,18 @@ int EnQueue(struct queue* queue, int value)
     q->rear = new;
     return 1;
 }
+
+int DeQueue(struct queue* queue)
+{
+    if(queue->front == NULL)
+        return 0;
+
+    struct node* temp = queue->front;
+
+    q->front = q->front->next;
+    if(q->front == NULL)
+        q->rear = NULL;
+
+    free(temp);
+    return 1;
+}
