@@ -21,4 +21,8 @@ int IsEmpty(struct deque* deque);
 
 int DequeSize(struct deque* deque);
 
+int Front(struct deque* deque);
+
+int Rear(struct deque* deque);
+
 #endif

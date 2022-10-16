@@ -32,3 +32,19 @@ int DequeSize(struct deque* deque)
 
     return i;
 }
+
+int Front(struct deque* deque)
+{
+    if(deque->front == NULL)
+        return 0;
+    
+    return deque->front->data;
+}
+
+int Rear(struct deque* deque)
+{
+    if(deque->rear == NULL)
+        return 0;
+    
+    return deque->rear->data;
+}
