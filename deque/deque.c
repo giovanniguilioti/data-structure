@@ -1,6 +1,6 @@
 #include "deque.h"
 
-struct deque* CreateDeque();
+struct deque* CreateDeque()
 {
     struct deque* new = malloc(sizeof(struct deque));
     new->front = new->rear = NULL;
@@ -47,4 +47,47 @@ int Rear(struct deque* deque)
         return 0;
     
     return deque->rear->data;
+}
+
+int InsertFront(struct deque* deque, int value)
+{
+    struct node* new = malloc(sizeof(struct node));
+    if(new == NULL)
+        return 0;
+
+    new->data = value;
+
+    if(deque->front == NULL)
+    {
+        deque->front = new;
+        deque->rear = deque->front;
+        new->next = NULL;
+        return 1;
+    }
+
+    new->next = deque->front;
+    deque->front = new;
+    return 1;
+}
+
+int InsertRear(struct deque* deque, int value)
+{
+
+    struct node* new = malloc(sizeof(struct node));
+    if(new == NULL)
+        return 0;
+
+    new->data = value;
+    new->next = NULL;
+
+    if(deque->rear == NULL)
+    {
+        deque->rear = new;
+        deque->front = deque->rear;
+        return 1;
+    }
+
+    deque->rear->next = new;
+    deque->rear = new;
+    return 1;
 }
