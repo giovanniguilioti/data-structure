@@ -91,3 +91,44 @@ int InsertRear(struct deque* deque, int value)
     deque->rear = new;
     return 1;
 }
+
+int DeleteFront(struct deque* deque)
+{
+    if(deque->front == NULL)
+        return 0;
+
+    struct node* temp = deque->front;
+    deque->front = deque->front->next;
+
+    free(temp);
+
+    if(deque->front == NULL)
+        deque->rear = NULL;
+
+    return 1;
+}
+
+int DeleteRear(struct deque* deque)
+{
+    if(deque->rear == NULL)
+        return 0;
+
+    if(deque->front == deque->rear)
+    {
+        free(deque->front);
+        deque->front = deque->rear = NULL;
+        return 1;
+    }
+
+    struct node* temp = deque->front;
+
+    while(temp->next != deque->rear)
+        temp = temp->next;
+
+    deque->rear = temp;
+
+    free(temp->next);
+
+    deque->rear->next = NULL;
+    return 1;
+}

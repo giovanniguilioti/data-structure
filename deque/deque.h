@@ -29,4 +29,8 @@ int InsertFront(struct deque* deque, int value);
 
 int InsertRear(struct deque* deque, int value);
 
+int DeleteFront(struct deque* deque);
+
+int DeleteRear(struct deque* deque);
+
 #endif
