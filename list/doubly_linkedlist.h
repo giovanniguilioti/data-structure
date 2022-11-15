@@ -24,4 +24,10 @@ int InsertAt(struct node** head, int index, int value);
 
 int InsertEnd(struct node** head, int value);
 
+int DeleteBegin(struct node** head);
+
+int DeleteAt(struct node** head, int index);
+
+int DeleteEnd(struct node** head);
+
 #endif
