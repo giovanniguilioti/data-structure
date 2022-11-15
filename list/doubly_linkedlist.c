@@ -65,3 +65,87 @@ int ElementAt(struct node* head, int index)
     
     return temp->data;
 }
+
+int InsertBegin(struct node** head, int value)
+{
+    struct node* new = malloc(sizeof(struct node));
+    if(new == NULL)
+        return 0;
+
+    new->data = value;
+    new->next = *head;
+    new->prev = NULL;
+
+    if(IsEmpty(*head))
+    {
+        *head = new;
+        return 1;
+    }
+
+    *head->prev = new;
+    *head = new;
+
+    return 1;
+}
+
+int InsertAt(struct node** head, int index, int value)
+{
+    if(index < 0 || index > ListSize(*head))
+        return 0;
+
+    struct node* new = malloc(sizeof(struct node));
+    if(new == NULL)
+        return 0;
+
+    new->data = value;
+    new->next = NULL;
+
+    if(index == 0)
+    {
+        new->next = *head;
+        new->prev = NULL;
+        *head = new;
+        return 1;
+    }
+
+    struct node* temp = *head;
+    int i = 1;
+    while(i < index)
+    {
+        temp = temp->next;
+        ++i;
+    }
+
+    new->prev = temp;
+    new->next = temp->next;
+    if(new->next != NULL)
+        new->next->prev = new;
+
+    temp->next = new;
+    return 1;
+}
+
+int InsertEnd(struct node** head, int value)
+{
+    struct node* new = malloc(sizeof(struct node));
+    if(new == NULL)
+        return 0;
+    
+    new->data = value;
+    new->next = NULL;
+
+    if(IsEmpty(*head))
+    {
+        new->prev = NULL;
+        *head = new;
+        return 1;
+    }
+
+    struct node* temp = *head;
+    while(temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = new;
+    new->prev = temp;
+    return 1;
+}

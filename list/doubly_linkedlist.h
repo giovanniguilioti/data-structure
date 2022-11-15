@@ -18,4 +18,10 @@ int SearchElement(struct node* head, int value);
 
 int ElementAt(struct node* head, int index);
 
+int InsertBegin(struct node** head, int value);
+
+int InsertAt(struct node** head, int index, int value);
+
+int InsertEnd(struct node** head, int value);
+
 #endif
