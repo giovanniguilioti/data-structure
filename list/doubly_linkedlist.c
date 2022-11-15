@@ -82,7 +82,7 @@ int InsertBegin(struct node** head, int value)
         return 1;
     }
 
-    *head->prev = new;
+    (*head)->prev = new;
     *head = new;
 
     return 1;

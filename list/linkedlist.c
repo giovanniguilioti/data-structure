@@ -81,7 +81,7 @@ int InsertBegin(struct node** head, int value)
 
 int InsertAt(struct node** head, int index, int value)
 {
-    if(index < 0 || index >= ListSize(*head))
+    if(index < 0 || index > ListSize(*head))
         return 0;
 
     struct node* new = malloc(sizeof(struct node));
