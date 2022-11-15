@@ -14,4 +14,8 @@ int IsEmpty(struct node* head);
 
 int Size(struct node* head);
 
+int SearchElement(struct node* head, int value);
+
+int ElementAt(struct node* head, int index);
+
 #endif
