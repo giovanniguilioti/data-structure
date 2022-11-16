@@ -15,7 +15,7 @@ int ListSize(struct node* head)
 
     struct node* temp = head->next;
 
-    int i = 0;
+    int i = 1;
     while(temp->next != NULL)
     {   
         temp = temp->next;
