@@ -145,3 +145,83 @@ int InsertEnd(struct node** head, int value)
     new->next = *head;
     return 1;
 }
+
+int DeleteBegin(struct node** head)
+{
+    if(IsEmpty(*head))
+        return 0;
+
+    struct node* temp = *head;
+
+    if((*head)->next == *head)
+        (*head)->next = NULL;
+
+    *head = (*head)->next;
+
+    struct node* aux = *head;
+    while(aux->next != temp)
+        aux = aux->next;
+
+    aux->next = *head;
+
+    free(temp);
+    return 1;
+}
+
+int DeleteAt(struct node** head, int index)
+{
+    if(IsEmpty(*head))
+        return 0;
+
+    if(index < 0 || index >= ListSize(*head))
+        return 0;
+
+    struct node* temp = *head;
+
+    if(index == 0)
+    {
+        *head = (*head)->next;
+        if((*head)->next == *head)
+            *head = NULL;
+
+        free(temp);
+        return 1;
+    }
+
+    int i = 1;
+    while(i < index)
+    {
+        temp = temp->next;
+        ++i;
+    }
+
+    struct node* end = temp->next;
+    temp->next = temp->next->next;
+
+    free(end);
+    return 1;
+}
+
+int DeleteEnd(struct node** head)
+{
+    if(IsEmpty(*head))
+        return 0;
+
+    struct node* temp = *head;
+
+    if(ListSize(*head) == 1)
+    {
+        free(temp);
+        *head = NULL;
+        return 1;
+    }
+
+    while(temp->next->next != *head)
+        temp = temp->next;
+
+    struct node* end = temp->next;
+    free(end);
+
+    temp->next = *head;
+    return 1;
+}
