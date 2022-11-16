@@ -1,19 +1,19 @@
 #include "circular_linkedlist.h"
 
-int IsEmpty(struct node* last)
+int IsEmpty(struct node* head)
 {
-    if(last == NULL)
+    if(head == NULL)
         return 1;
 
     return 0;
 }
 
-int ListSize(struct node* last)
+int ListSize(struct node* head)
 {
-    if(last == NULL)
+    if(head == NULL)
         return 0;
 
-    struct node* temp = last->next;
+    struct node* temp = head->next;
 
     int i = 1;
     while(temp != NULL)
@@ -23,4 +23,45 @@ int ListSize(struct node* last)
     }
 
     return i;
+}
+
+int SearchElement(struct node* head, int value)
+{
+    if(IsEmpty(head))
+        return -1;
+
+    struct node* temp = head;
+    int i = 0;
+    while(temp != head)
+    {
+        if(temp->data == value)
+            return i;
+        
+        temp = temp->next;
+        ++i;
+    }
+
+    return -1;
+}
+
+int ElementAt(struct node* head, int index)
+{
+    if(IsEmpty(head))
+        return 0;
+
+    if(index < 0)
+        return 0;
+
+    if(index >= ListSize(head))
+        return 0;
+
+    struct node* temp = head;
+    int i = 0;
+    while(i < index)
+    {
+        temp = temp->next;
+        ++i;
+    }
+    
+    return temp->data;
 }

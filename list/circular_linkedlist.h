@@ -9,8 +9,12 @@ struct node
     struct node* next;
 };
 
-int IsEmpty(struct node* last);
+int IsEmpty(struct node* head);
 
-int Size(struct node* last);
+int Size(struct node* head);
+
+int SearchElement(struct node* head, int value);
+
+int ElementAt(struct node* head, int index);
 
 #endif
