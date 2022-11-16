@@ -13,10 +13,10 @@ int ListSize(struct node* head)
     if(head == NULL)
         return 0;
 
-    struct node* temp = head->next;
+    struct node* temp = head;
 
     int i = 1;
-    while(temp != NULL)
+    while(temp->next != head)
     {   
         temp = temp->next;
         ++i;
@@ -30,8 +30,15 @@ int SearchElement(struct node* head, int value)
     if(IsEmpty(head))
         return -1;
 
-    struct node* temp = head;
-    int i = 0;
+    if(head->data == value)
+        return 0;
+
+    struct node* temp = head->next;
+
+    if(temp == head)
+        return -1;
+
+    int i = 1;
     while(temp != head)
     {
         if(temp->data == value)
@@ -75,9 +82,18 @@ int InsertBegin(struct node** head, int value)
     new->data = value;
     new->next = *head;
     *head = new;
-
+    
     if(new->next == NULL)
+    {
         new->next = *head;
+        return 1;
+    }
+
+    struct node* temp = (*head)->next;
+    while(temp->next != (*head)->next)
+        temp = temp->next;
+
+    temp->next = *head;
 
     return 1;
 }
@@ -100,7 +116,16 @@ int InsertAt(struct node** head, int index, int value)
         *head = new;
         
         if(new->next == NULL)
+        {
             new->next = *head;
+            return 1;
+        }
+
+        struct node* temp = (*head)->next;
+        while(temp->next != (*head)->next)
+        temp = temp->next;
+
+        temp->next = *head;
 
         return 1;
     }
@@ -177,12 +202,20 @@ int DeleteAt(struct node** head, int index)
         return 0;
 
     struct node* temp = *head;
-
     if(index == 0)
     {
         *head = (*head)->next;
         if((*head)->next == *head)
+        {
             *head = NULL;
+            return 1;
+        }
+
+        struct node* aux = *head;
+        while(aux->next != temp)
+            aux = aux->next;
+
+        aux->next = *head;
 
         free(temp);
         return 1;
