@@ -10,7 +10,7 @@ int IsEmpty(struct node* root)
 
 int Nodes(struct node* node)
 {
-    if(root == NULL)
+    if(node == NULL)
         return 0;
     
     return 1 + Nodes(root->left) + Nodes(root->right);
