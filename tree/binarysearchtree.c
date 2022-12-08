@@ -45,3 +45,15 @@ void PostOrder(struct node* node)
     PostOrder(node->right);
     //process the node
 }
+
+int Search(struct node* node, int data)
+{
+    if(node == NULL)
+        return 0;
+    if(data == node->data)
+        return 1;
+    if(data < node->data)
+        return Search(node->left, data);
+    if(data > node->data)
+        return Search(node->right, data);
+}
