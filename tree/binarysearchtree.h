@@ -8,7 +8,9 @@ struct node
     int data;
     struct node* left;
     struct node* right;
-}
+};
+
+struct node* NewNode(int data);
 
 int IsEmpty(struct node* root);
 
@@ -21,5 +23,7 @@ void PreOrder(struct node* node);
 void PostOrder(struct node* node);
 
 int Search(struct node* node, int data);
+
+int Insert(struct node* root, int data);
 
 #endif
