@@ -22,8 +22,12 @@ void PreOrder(struct node* node);
 
 void PostOrder(struct node* node);
 
-int Search(struct node* node, int data);
+int Search(struct node* node, int key);
 
-int Insert(struct node* root, int data);
+struct node* Insert(struct node* root, int key);
+
+struct node* MinValueNode(struct node* node);
+
+struct node* Delete(struct node* root, int key);
 
 #endif

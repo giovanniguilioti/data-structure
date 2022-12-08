@@ -54,28 +54,70 @@ void PostOrder(struct node* node)
     //process the node
 }
 
-int Search(struct node* node, int data)
+int Search(struct node* node, int key)
 {
     if(node == NULL)
         return 0;
-    if(data == node->data)
+    if(key == node->data)
         return 1;
-    if(data < node->data)
-        return Search(node->left, data);
-    if(data > node->data)
-        return Search(node->right, data);
+    if(key < node->data)
+        return Search(node->left, key);
+    if(key > node->data)
+        return Search(node->right, key);
 }
 
-int Insert(struct node* node, int data)
+struct node* Insert(struct node* node, int key)
 {
     if(node == NULL)
-    {
-        node = NewNode(data);
-        return 1;
-    }
+        node = NewNode(key);
 
-     if (data < node->data)
-        node->left = Insert(node->left, data);
+    if (key < node->data)
+        node->left = Insert(node->left, key);
     else
-        node->right = Insert(node->right, data);
+        node->right = Insert(node->right, key);
+
+    return node;
+}
+
+struct node* minValueNode(struct node* node)
+{
+    struct node* current = node;
+ 
+    while (current && current->left != NULL)
+        current = current->left;
+ 
+    return current;
+}
+
+struct node* Delete(struct node* node, int key)
+{
+    if(node == NULL) return 0;
+
+    if (key < node->data)
+        node->left = Delete(node->left, key);
+    else if(key > node->data)
+        node->right = Delete(node->right, key);
+    else
+    {
+        if(node->left == NULL)
+        {
+            struct node* temp = node->right;
+            free(node);
+            return temp;
+        }
+        else if(node->right == NULL)
+        {
+            struct node* temp = node->left;
+            free(node);
+            return temp;
+        }
+
+        struct node* temp = MinValueNode(node->right);
+
+        node->data = temp->data;
+
+        node->right = Delete(node->right, temp->data);
+    }
+    
+    return node;
 }
